@@ -198,7 +198,48 @@
                         }
                     }
                 },
-                "summary": "Get user Orders"
+                "summary": "Get products in user cart"
+            },
+
+            "post": {
+                "tags": [
+                    "Cart"
+                ],
+                "parameters": [
+                    {
+                        "name": "_id",
+                        "in":"query",
+                        "required":true,
+                        "type": "string",
+                        "description": "User id"
+                    },
+                    {
+                        "name": "productId",
+                        "in":"body",
+                        "required":true,
+                        "description": "Product id",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in":"header",
+                        "required":false,
+                        "type": "string",
+                        "description": "Result of product adding"
+                    }
+                ],
+                "description": "Add product to Cart",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                },
+                "summary": "Add product to Cart"
             }
         },
 
@@ -305,40 +346,40 @@
                         }
                     }
                 },
-                "summary": "Products on Shop page"
+                "summary": "Add new product"
             }
         },
 
         "/edit-product/{productId}":{
-            "parameters": [
-                {
-                    "name": "edit",
-                    "in":"query",
-                    "required":true,
-                    "type": "number",
-                    "description": "Edit mode"
-                },
-                {
-                    "name": "productId",
-                    "in":"path",
-                    "required":true,
-                    "type": "string",
-                    "description": "Product id"
-                },
-                {
-                    "name": "type",
-                    "in":"header",
-                    "required":false,
-                    "type": "string",
-                    "description": "Order info"
-                }
-            ],
 
             "get": {
                 "tags": [
                     "Product"
                 ],
                 "description": "Find information about edit product",
+                "parameters": [
+                    {
+                        "name": "edit",
+                        "in":"query",
+                        "required":true,
+                        "type": "boolean",
+                        "description": "Edit mode"
+                    },
+                    {
+                        "name": "productId",
+                        "in":"path",
+                        "required":true,
+                        "type": "string",
+                        "description": "Product id"
+                    },
+                    {
+                        "name": "type",
+                        "in":"header",
+                        "required":false,
+                        "type": "string",
+                        "description": "Order info"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -347,7 +388,55 @@
                         }
                     }
                 },
-                "summary": "Get order"
+                "summary": "Get edit product"
+            },
+
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "description": "Edit product",
+                "parameters": [
+                    {
+                        "name": "_id",
+                        "in":"query",
+                        "required":true,
+                        "type": "string",
+                        "description": "User id"
+                    },
+                    {
+                        "name": "productId",
+                        "in":"path",
+                        "required":true,
+                        "type": "string",
+                        "description": "Product id"
+                    },
+                    {
+                        "name": "body",
+                        "in":"body",
+                        "required":true,
+                        "description": "Edit product info",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in":"header",
+                        "required":false,
+                        "type": "string",
+                        "description": "Order info"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                },
+                "summary": "Post edit product"
             }
         },
 
@@ -420,7 +509,7 @@
                 "tags": [
                     "Product"
                 ],
-                "description": "Delete product by id from cart",
+                "description": "Creater order",
                 "responses": {
                     "200": {
                         "description": "OK",
