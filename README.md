@@ -29,7 +29,9 @@ __3. Use-Case - диаграмма__
 <img src="img/guest.png" alt="drawing" width="500"/>
 <img src="img/client.png" alt="drawing" width="700"/>
 <!-- ![Клиент](client.png) -->
+
 ![Администратор](img/admin_web.png)
+
 
 __4. ER-диаграмма сущностей__
 
