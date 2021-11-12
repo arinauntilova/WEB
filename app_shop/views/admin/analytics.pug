@@ -1,0 +1,56 @@
+extends ../layouts/main-layout.pug
+
+block styles
+    link(rel="stylesheet", href="/css/forms.css")
+    //- link(rel="stylesheet", href="/css/auth.css")
+    link(rel="stylesheet", href="/css/analytics.css")
+
+block content
+    if errorMessage
+        .user-message.user-message--error #{errorMessage}
+
+    <section>
+    <label class="select-label"><strong>Выберите год для анализа:</strong></label>
+    <select class="cs-select cs-skin-rotate", id="year1">
+        <option value="1">2021</option>
+        <option value="2">2020</option>
+        <option value="3">2019</option>
+        <option value="4">2018</option>
+        <option value="5">2017</option>
+    </select>
+    </section> 
+
+    form.analys-form
+        .form-control 
+            label(for="button1") Получить иформацию о среднем чеке заказов за указанный год – соотношение суммы всех заказов к числу чеков
+            button.btn(type="button", name="button1" onclick="ShowAnalys_avg_bill(this)") Рассчитать!
+        .form-control 
+            label(for="button2") Получить иформацию о прибыли за указанный год – разница между доходами и затратами компании
+            button.btn(type="button", name="button2" onclick="ShowAnalys_benefit(this)") Рассчитать!
+        .form-control 
+            label(for="button3") Получить информацию о жанрах самых продаваемых товаров
+            button.btn(type="button", name="button3" onclick="ShowAnalys_popgenres(this)") Рассчитать!
+        .form-control 
+            label(for="button4") Получить информацию о жанрах самых возвращаемых товаров
+            button.btn(type="button", name="button4" onclick="ShowAnalys_nonpopgenres(this)") Рассчитать!
+        .form-control 
+            label(for="button5") Получить названия товаров, которые чаще всего были куплены в указанном году
+            button.btn(type="button", name="button5" onclick="ShowAnalys_titles(this)") Рассчитать!
+        //- .form-control 
+        //-     label(for="button6") Получить информацию о поставщиках, чьи товары, чаще всего были куплены в указанном году
+        //-     button.btn(type="button", name="button6" onclick="ShowAnalys_providers(this)") Рассчитать!
+
+    <div class = "help", id = "help_id">
+        <canvas id="grafica" width="405" height="135" ></canvas>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
+        <script src='http://code.jquery.com/jquery-2.1.1.min.js'></script>
+        script(src="/js/admin.js")
+    </div>
+
+
+        
+
+
+
+
+

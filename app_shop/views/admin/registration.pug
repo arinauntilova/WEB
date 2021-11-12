@@ -1,0 +1,36 @@
+extends ../layouts/main-layout.pug
+
+block styles
+    link(rel="stylesheet", href="/css/forms.css")
+    link(rel="stylesheet", href="/css/auth.css")
+
+block content
+    if errorMessage
+        .user-message.user-message--error #{errorMessage}
+    form.login-form(action="/signup", method="POST", novalidate)
+        .form-control
+            label(for="email") E-Mail
+            input(type="email", name="email", value=oldInput.email, class=(validationErrors.find(e => e.param == "email") ? "invalid" : ""))#email
+        .form-control
+            label(for="password") Должность
+            input(type="role", name="role", value=oldInput.role, class=(validationErrors.find(e => e.param == "role") ? "invalid" : ""))#role
+        .form-control
+            label(for="firstname") Имя
+            input(type="text", name="firstname", value=oldInput.firstname, class=(validationErrors.find(e => e.param == "firstname") ? "invalid" : ""))#firstname
+        .form-control
+            label(for="lastname") Фамилия
+            input(type="text", name="lastname", value=oldInput.lastname, class=(validationErrors.find(e => e.param == "lastname") ? "invalid" : ""))#lastname
+        .form-control
+            label(for="date_birth") Дата рождения
+            input(type="date", name="date_birth", value="2000-01-01", class=(validationErrors.find(e => e.param == "date_birth") ? "invalid" : ""))#date_birth
+        .form-control
+            label(for="country") Страна (название или ISO)
+            input(type="text", name="country", value=oldInput.country, class=(validationErrors.find(e => e.param == "country") ? "invalid" : ""))#country
+        .form-control
+            label(for="password") Пароль
+            input(type="password", name="password", value=oldInput.password, class=(validationErrors.find(e => e.param == "password") ? "invalid" : ""))#password
+        .form-control
+            label(for="confirmPassword") Подтвердите пароль
+            input(type="password", name="confirmPassword", value=oldInput.confirmPassword, class=(validationErrors.find(e => e.param == "confirmPassword") ? "invalid" : ""))#confirmPassword
+        button.btn(type="submit") Зарегистрировать
+        input(type="hidden", name="_csrf", value=csrfToken)

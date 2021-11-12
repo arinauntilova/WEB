@@ -1,0 +1,604 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0", 
+      "title": "My User Project CRUD",
+      "description": "My User Project Application API",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:5000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Users",
+        "description": "API for users in the system"
+      }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+
+
+    "paths": {
+        "/products/{productId}": {
+            "parameters": [
+                {
+                    "name": "productId",
+                    "in":"path",
+                    "required":true,
+                    "type": "string",
+                    "description": "Product id"
+                },
+                {
+                    "name": "type",
+                    "in":"header",
+                    "required":false,
+                    "type": "string",
+                    "description": "Product info"
+                }
+            ],
+
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "description": "Find information about Product by id",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                },
+                "summary": "Get product"
+            },
+
+            "delete":{
+                "tags": [
+                    "Product"
+                ],
+                "description": "Delete Product by id",
+                "parameters": [
+                    {
+                        "name": "_id",
+                        "in":"query",
+                        "required":true,
+                        "type": "string",
+                        "description": "User id"
+                    },
+                    {
+                        "name": "productId",
+                        "in":"path",
+                        "required":true,
+                        "type": "string",
+                        "description": "Product id"
+                    },
+                    {
+                        "name": "type",
+                        "in":"header",
+                        "required":false,
+                        "type": "string",
+                        "description": "Product info"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                },
+                "summary": "Delete product"
+            }
+        },
+
+        "/orders":{
+            "parameters": [
+                {
+                    "name": "_id",
+                    "in":"query",
+                    "required":true,
+                    "type": "string",
+                    "description": "User id"
+                },
+                {
+                    "name": "type",
+                    "in":"header",
+                    "required":false,
+                    "type": "string",
+                    "description": "Orders info"
+                }
+            ],
+
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "description": "Find information about all Orders by User id",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                },
+                "summary": "Get user Orders"
+            }
+        },
+
+        "/orders/{orderId}":{
+            
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "description": "Find information about Order by id",
+                "parameters": [
+                    {
+                        "name": "orderId",
+                        "in":"path",
+                        "required":true,
+                        "type": "string",
+                        "description": "Order id"
+                    },
+                    {
+                        "name": "type",
+                        "in":"header",
+                        "required":false,
+                        "type": "string",
+                        "description": "Order info"
+                    }
+                ],    
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Order"
+                        }
+                    }
+                },
+                "summary": "Get order"
+            }
+        },
+
+        "/cart":{
+    
+            "get": {
+                "tags": [
+                    "Cart"
+                ],
+                "parameters": [
+                    {
+                        "name": "_id",
+                        "in":"query",
+                        "required":true,
+                        "type": "string",
+                        "description": "User id"
+                    },
+                    {
+                        "name": "type",
+                        "in":"header",
+                        "required":false,
+                        "type": "string",
+                        "description": "Orders info"
+                    }
+                ],
+                "description": "Find information about all Products in Cart User id",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Cart"
+                        }
+                    }
+                },
+                "summary": "Get user Orders"
+            }
+        },
+
+        "/products":{
+            "parameters": [
+                {
+                    "name": "page",
+                    "in":"query",
+                    "required":true,
+                    "type": "string",
+                    "description": "Page number"
+                },
+                {
+                    "name": "type",
+                    "in":"header",
+                    "required":false,
+                    "type": "string",
+                    "description": "Products"
+                }
+            ],
+
+            "get": {
+                "tags": [
+                    "Cart"
+                ],
+                "description": "Find Products on certain page",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Products"
+                        }
+                    }
+                },
+                "summary": "Products on page"
+            }
+        },
+
+        "/":{
+            "parameters": [
+                {
+                    "name": "page",
+                    "in":"query",
+                    "required":true,
+                    "type": "string",
+                    "description": "Page number"
+                },
+                {
+                    "name": "type",
+                    "in":"header",
+                    "required":false,
+                    "type": "string",
+                    "description": "Products"
+                }
+            ],
+
+            "get": {
+                "tags": [
+                    "Cart"
+                ],
+                "description": "Find Products on certain page",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Products"
+                        }
+                    }
+                },
+                "summary": "Products on Shop page"
+            }
+        },
+
+        "/add-product":{
+            "parameters": [
+                {
+                    "name": "body",
+                    "in":"body",
+                    "required":true,
+                    "description": "New product info",
+                    "schema": {
+                        "$ref": "#/definitions/Product"
+                    }
+                },
+                {
+                    "name": "type",
+                    "in":"header",
+                    "required":false,
+                    "type": "string",
+                    "description": "Product"
+                }
+            ],
+
+            "post": {
+                "tags": [
+                    "Cart"
+                ],
+                "description": "Find Products on certain page",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Products"
+                        }
+                    }
+                },
+                "summary": "Products on Shop page"
+            }
+        },
+
+        "/edit-product/{productId}":{
+            "parameters": [
+                {
+                    "name": "edit",
+                    "in":"query",
+                    "required":true,
+                    "type": "number",
+                    "description": "Edit mode"
+                },
+                {
+                    "name": "productId",
+                    "in":"path",
+                    "required":true,
+                    "type": "string",
+                    "description": "Product id"
+                },
+                {
+                    "name": "type",
+                    "in":"header",
+                    "required":false,
+                    "type": "string",
+                    "description": "Order info"
+                }
+            ],
+
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "description": "Find information about edit product",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                },
+                "summary": "Get order"
+            }
+        },
+
+        "/cart-delete-item":{
+            "parameters": [
+                {
+                    "name": "_id",
+                    "in":"query",
+                    "required":true,
+                    "type": "string",
+                    "description": "User id"
+                },
+                {
+                    "name": "productId",
+                    "in":"body",
+                    "required":true,
+                    "description": "Product id",
+                    "schema": {
+                        "$ref": "#/definitions/Product"
+                    }
+                },
+                {
+                    "name": "type",
+                    "in":"header",
+                    "required":false,
+                    "type": "string",
+                    "description": "Order info"
+                }
+            ],
+
+            "delete": {
+                "tags": [
+                    "Product"
+                ],
+                "description": "Delete product by id from cart",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    },
+                    "404": {
+                        "description": "Product not found in cart"
+                    }
+                },
+                "summary": "Delete product from cart"
+            }
+        },
+        
+        "/create-order":{
+            "parameters": [
+                {
+                    "name": "_id",
+                    "in":"query",
+                    "required":true,
+                    "type": "string",
+                    "description": "User id"
+                },
+                {
+                    "name": "type",
+                    "in":"header",
+                    "required":false,
+                    "type": "string",
+                    "description": "Order info"
+                }
+            ],
+
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "description": "Delete product by id from cart",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    },
+                    "404": {
+                        "description": "Product not found in cart"
+                    }
+                },
+                "summary": "Delete product from cart"
+            }
+        }
+
+
+
+        
+
+    },
+    "definitions": {
+        
+        "Product": {
+            "required": [
+                "title",
+                "prime_price",
+                "price",
+                "description",
+                "imageUrl"
+            ],
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "prime_price": {
+                    "type": "number"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "imageUrl": {
+                    "type": "string"
+                },
+                "num_purch": {
+                    "type": "number"
+                },
+                "num_deletions": {
+                    "type": "number"
+                },
+                "date_add": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "date_purch": {
+                    "type": "string",
+                    "format": "date"
+                }
+
+            }
+        },
+
+        "Products": {
+            "type": "array",
+            "items":{
+                "$ref": "#/definitions/Product"
+            }       
+        },
+
+        "Cart": {
+            "properties": {
+                "cart_items": {
+                    "type": "array",
+                    "items":{
+                        "type":"object",
+                        "properties":{
+                            "productId": {  
+                                "$ref": "#/definitions/Product" 
+                            },
+                            "quantity": { 
+                                "type": "number"
+                            }
+                        }
+                    }    
+                }
+            }
+        },
+
+        "User": {
+            "required": [
+                "email",
+                "role",
+                "password",
+                "name"
+            ],
+
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+            
+                "role": {
+                    "type": "string"
+                },
+            
+                "password": {
+                    "type": "string"
+                },
+            
+                "name": {
+                    "type":"object",
+                    "items":{
+                        "properties":{
+                            "firstname": {
+                                "type": "string"
+                            },
+                            "lastname": {
+                                "type": "string"
+                            }
+                        }
+                        
+                    }
+                },
+            
+                "date_birth": {               
+                    "type": "string",
+                    "format": "date"
+                },
+                
+                "country":{   
+                    "type": "string"
+                },
+
+                "cart":{         
+                    "$ref": "#/definitions/Cart" 
+                }
+            }
+        },
+
+        "Order": {
+            "required": [
+                "user"
+            ],
+            "properties": {
+                "products": {
+                    "type": "array",
+                    "items":{
+                        "type":"object",
+                        "properties":{
+                            "productData": { 
+                                "type": "object"
+                                },
+                            "quantity": { 
+                                "type": "number"
+                            }
+                        }                    
+                    } 
+                },
+                "user": {
+                    "type": "object",
+                    "properties":
+                    {
+                        "email": {
+                            "type": "string"
+                        },
+                        "userId": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                },
+                "date_purch": {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        }
+
+    }
+}

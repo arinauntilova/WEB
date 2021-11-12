@@ -1,0 +1,36 @@
+extends ../layouts/main-layout.pug
+
+block styles
+    link(rel="stylesheet", href="/css/forms.css")
+    link(rel="stylesheet", href="/css/product.css")
+
+block content
+    if errorMessage
+        .user-message.user-message--error #{errorMessage}
+    form.product-form(action="/admin/" + (editing ? "edit-product" : "add-product"), method="POST", enctype="multipart/form-data")
+        .form-control
+            label(for="title") Название
+            input(type="text", name="title", value=(editing || hasError ? product.title : ""), class=(validationErrors.find(e => e.param == "title") ? "invalid" : ""))#title
+        //- .form-control
+        //-     label(for="imageUrl") Image URL
+        //-     input(type="text", name="imageUrl", value=(editing || hasError ? product.imageUrl : ""), class=(validationErrors.find(e => e.param == "imageUrl") ? "invalid" : ""))#imageUrl
+        .form-control
+            label(for="image") Изображение
+            input(type="file", name="image")#imageUrl
+        .form-control
+            label(for="price") Цена
+            input(type="number", name="price", step="1", value=(editing || hasError ? product.price : ""), class=(validationErrors.find(e => e.param == "price") ? "invalid" : ""))#price
+        .form-control
+            label(for="prime_price") Оптовая цена
+            input(type="number", name="prime_price", step="1", value=(editing || hasError ? product.prime_price : ""), class=(validationErrors.find(e => e.param == "prime_price") ? "invalid" : ""))#prime_price
+        .form-control
+            label(for="genre") Жанр
+            //- textarea(name="genre", row = 1, class=(validationErrors.find(e => e.param == "genre") ? "invalid" : ""))#genre #{editing || hasError ? product.genre : ""}
+            input(type="text", name="genre", value=(editing || hasError ? product.genre : ""), class=(validationErrors.find(e => e.param == "genre") ? "invalid" : ""))#genre
+        .form-control
+            label(for="description") Описание
+            textarea(name="description", rows=5, class=(validationErrors.find(e => e.param == "description") ? "invalid" : ""))#description #{editing || hasError ? product.description : ""}
+        if editing
+            input(type="hidden", value=product._id, name="productId")
+        input(type="hidden", name="_csrf", value=csrfToken)
+        button.btn(type="submit") #{editing ? "Изменить товар" : "Добавить товар"}

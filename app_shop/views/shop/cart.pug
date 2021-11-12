@@ -1,0 +1,23 @@
+extends ../layouts/main-layout.pug
+
+block styles
+    link(rel="stylesheet", href="/css/cart.css")
+
+block content
+    if products.length > 0
+        ul.cart__item-list
+            each product in products
+                li.cart__item
+                    h1 #{product.productId.title} 
+                    h2 Количество: #{product.quantity}
+                    form(action="/cart-delete-item", method="POST")
+                        button.btn.danger(type="submit") Удалить
+                        input(type="hidden", value=product.productId._id, name="productId")
+                        input(type="hidden", name="_csrf", value=csrfToken)
+        hr
+        .centered
+            form(action="/create-order", method="POST")
+                button.btn(type="submit") Заказать!
+                input(type="hidden", name="_csrf", value=csrfToken)
+    else
+        h1 Здесь пусто :(
